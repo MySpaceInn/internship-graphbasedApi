@@ -1,5 +1,5 @@
 from .record import Records
 from .attributevalue import AttributeValues
-# from .user import User
+# from .user import MyUser
 
 __all__ = ['Records', 'AttributeValues']
