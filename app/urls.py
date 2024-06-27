@@ -1,11 +1,10 @@
 from django.urls import path, include
 from rest_framework import routers
-from app.views.record_views import RecordViewSet
+from .views.record_views import RecordViewSet
+from .views.register_view import RegisterView
 
-
-
-# It is used for url configuration. it routes the url based on key of url_viewset. it transfer key in url in router
-url_viewset= {
+# Define the URL configuration for viewsets
+url_viewset = {
     'roster': RecordViewSet,
     'business': RecordViewSet,
     'staff': RecordViewSet,
@@ -13,12 +12,12 @@ url_viewset= {
     'leave': RecordViewSet,
 }
 
-
-router=routers.DefaultRouter()
+router = routers.DefaultRouter()
 for url, viewset in url_viewset.items():
     router.register(url, viewset, basename=url)
 
+# Define urlpatterns including both viewsets and APIViews
 urlpatterns = [
-    path('',include(router.urls)),
-
+    path('', include(router.urls)),
+    path('register/', RegisterView.as_view(), name='register'),
 ]

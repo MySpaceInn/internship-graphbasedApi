@@ -15,7 +15,8 @@ class RecordViewSet(viewsets.ModelViewSet):
 
     def get_record_model(self, record_type):  
         for recordes in record_models:
-            if recordes.type == record_type.upper():  # Ensure type is UPPERCASE for consistent matching
+            if recordes.type == record_type.upper(): 
+                print(recordes) # Ensure type is UPPERCASE for consistent matching
                 return recordes
         return None
 
@@ -23,8 +24,10 @@ class RecordViewSet(viewsets.ModelViewSet):
     def create_record(self, request):
         try:
             data = request.data
+            print(data)
             data['type']=data['record_model'].upper()
             record_model = self.get_record_model(data['type'])
+            print(record_model)
             if record_model is None:
                 return Response({"error": "RecordModel type not found"}, status=status.HTTP_400_BAD_REQUEST)
             attributes = data.get('attributes', [])

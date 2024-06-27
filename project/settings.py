@@ -19,7 +19,7 @@ SECRET_KEY = 'django-insecure-x+=*pv^p&51h-l55i^q-c%!&ioh87-l6rvndn6@xs0qxlz_rk^
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.13']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -30,10 +30,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',  # Replace 'app' with your actual app name
     'rest_framework',
+    'corsheaders',
     'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -118,3 +120,10 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME_LATE_USER': timedelta(days=1),
     'SLIDING_TOKEN_LIFETIME_LATE_USER': timedelta(days=30),
 }
+# CORS settings
+CORS_ALLOW_ALL_ORIGINS = False  # Set to True to allow all origins
+CORS_ALLOWED_ORIGINS = [
+    "http://192.168.1.13:8000",  # Example: Replace with your frontend URL
+    # "https://your-production-domain.com",
+    # Add more origins as needed
+]
